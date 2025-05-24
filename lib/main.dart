@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Smart Light Control',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -36,7 +37,7 @@ class LightData {
     this.isOn = false,
     this.hasTimer = false,
     this.timerHours = 0,
-    this.timerMinutes = 1, // UBAH DARI 30 MENJADI 1
+    this.timerMinutes = 1,
     this.remainingSeconds = 0,
     this.timer,
     this.isManuallyControlled = false,
@@ -161,6 +162,7 @@ class _LightControlScreenState extends State<LightControlScreen>
       int relayNumber = (lightIndex % 2) + 1; // relay 1 atau 2
       String action = turnOn ? "on" : "off";
       String url = "http://$arduinoIP/relay$relayNumber/$action";
+      print("🔄 Mengirim request ke: $url");
 
       final response =
           await http.get(Uri.parse(url)).timeout(Duration(seconds: 5));
@@ -279,26 +281,29 @@ class _LightControlScreenState extends State<LightControlScreen>
               children: [
                 // Header
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                      size: 28,
-                    ),
-                    Text(
-                      'Smart Light Control',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                    // Icon(
+                    //   Icons.menu,
+                    //   color: Colors.white,
+                    //   size: 28,
+                    // ),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          'Smart Light Control',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
-                    Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                      size: 28,
-                    ),
+                    // Icon(
+                    //   Icons.settings,
+                    //   color: Colors.white,
+                    //   size: 28,
+                    // ),
                   ],
                 ),
 
