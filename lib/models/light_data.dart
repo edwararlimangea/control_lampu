@@ -1,3 +1,5 @@
+// Model data lampu
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,7 @@ class LightData {
     this.isOn = false,
     this.hasTimer = false,
     this.timerHours = 0,
-    this.timerMinutes = 30,
+    this.timerMinutes = 1,
     this.remainingSeconds = 0,
     this.timer,
     this.isManuallyControlled = false,
